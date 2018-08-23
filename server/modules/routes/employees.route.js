@@ -43,5 +43,23 @@ router.put('/status/:id/:active', (req, res) => {
     })
 })
 
+router.put('/', (req, res) => {
+    console.log('/employees PUT hit with: ', req.body);
+    const editedEmployee = req.body;
+    const query = `UPDATE "employees" 
+                    SET "first_name" = $1,
+                    "last_name" = $2,
+                    "clockin_code" = $3
+                    WHERE "id" = $4;`;
+    pool.query(query, [editedEmployee.first_name, editedEmployee.last_name, 
+                        editedEmployee.clockin_code, editedEmployee.id])
+    .then((results) => {
+        res.sendStatus(201);
+    }).catch((error) => {
+        console.log('error: ', error);
+        res.sendStatus(500);
+    })
+})
+
 // exports
 module.exports = router;

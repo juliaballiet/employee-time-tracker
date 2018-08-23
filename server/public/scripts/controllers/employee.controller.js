@@ -14,9 +14,9 @@ timeApp.controller('EmployeeController', function($http){
         }).then(function(response){
             console.log('back from server with: ', response);
             vm.newEmployee = {
-                firstName: '',
-                lastName: '',
-                clockInCode: ''
+                first_name: '',
+                last_name: '',
+                clockin_code: ''
             }
             getEmployees();
         }).catch(function(error){
@@ -32,6 +32,22 @@ timeApp.controller('EmployeeController', function($http){
         console.log(vm.employeeToEdit);
     }
 
+    vm.editEmployee = function(employee){
+        console.log('in editEmployee with: ', employee);
+
+        $http({
+            method: 'PUT',
+            url: '/employees',
+            data: employee
+        }).then(function(response){
+            console.log('back from server with: ', response);
+            getEmployees();
+        }).catch(function(error){
+            console.log('error: ', error);
+            alert('there was an error editing the employee');
+        })
+    }
+
     vm.changeEmployeeStatus = function(employee){
         console.log('in changeEmployeeStatus with: ', employee);
 
@@ -45,7 +61,7 @@ timeApp.controller('EmployeeController', function($http){
             getEmployees();
         }).catch(function(error){
             console.log('error: ', error);
-            alert('there was an error deactivating the employee');
+            alert('there was an error editing the employee');
         })
     }
     
