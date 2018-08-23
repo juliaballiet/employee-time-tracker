@@ -2,11 +2,19 @@
 
 <h2>Add New Employee</h2>
 <form ng-submit="ec.addEmployee(ec.newEmployee)">
-    First Name: <input ng-model="ec.newEmployee.firstName" type="text">
-    Last Name: <input ng-model="ec.newEmployee.lastName" type="text">
-    Clock In Code: <input ng-model="ec.newEmployee.clockInCode" type="number">
+    First Name: <input ng-model="ec.newEmployee.first_name" type="text">
+    Last Name: <input ng-model="ec.newEmployee.last_name" type="text">
+    Clock In Code: <input ng-model="ec.newEmployee.clockin_code" type="number">
     <button>Add</button>
 </form>
+
+<h2 ng-show="ec.edit">Edit Employee</h2>
+<form ng-show="ec.edit" ng-submit="ec.editEmployee(ec.employeeToEdit)">
+        First Name: <input ng-model="ec.employeeToEdit.first_name" type="text">
+        Last Name: <input ng-model="ec.employeeToEdit.last_name" type="text">
+        Clock In Code: <input ng-model="ec.employeeToEdit.clockin_code" type="number">
+        <button>Edit</button>
+    </form>
 
 <h2>Active Employees</h2>
 <table>
@@ -24,7 +32,7 @@
             <td>{{employee.last_name}}</td>
             <td>{{employee.clockin_code}}</td>
             <td>
-                <button>Edit</button>
+                <button ng-click="ec.viewEditFields(employee)">Edit</button>
                 <button ng-click="ec.changeEmployeeStatus(employee)">Deactivate</button>
             </td>
         </tr>
@@ -47,7 +55,7 @@
                 <td>{{employee.last_name}}</td>
                 <td>{{employee.clockin_code}}</td>
                 <td>
-                    <button>Edit</button>
+                    <button ng-click="ec.editEmployee(employee)">Edit</button>
                     <button ng-click="ec.changeEmployeeStatus(employee)">Activate</button>
                 </td>
             </tr>

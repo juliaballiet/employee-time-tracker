@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
     const newEmployee = req.body;
     const query = `INSERT INTO "employees" ("first_name", "last_name", "clockin_code")
                     VALUES ($1, $2, $3);`;
-    pool.query(query, [newEmployee.firstName, newEmployee.lastName, newEmployee.clockInCode])
+    pool.query(query, [newEmployee.first_name, newEmployee.last_name, newEmployee.clockin_code])
     .then((results) => {
         res.sendStatus(201);
     }).catch((error) => {

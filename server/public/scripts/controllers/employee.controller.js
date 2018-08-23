@@ -1,5 +1,6 @@
 timeApp.controller('EmployeeController', function($http){
     let vm = this;
+    vm.edit = false;
 
     getEmployees();
 
@@ -12,11 +13,23 @@ timeApp.controller('EmployeeController', function($http){
             data: employee
         }).then(function(response){
             console.log('back from server with: ', response);
+            vm.newEmployee = {
+                firstName: '',
+                lastName: '',
+                clockInCode: ''
+            }
             getEmployees();
         }).catch(function(error){
             console.log('error: ', error);
             alert('there was an error adding the employee');
         })
+    }
+
+    vm.viewEditFields = function(employee){
+        console.log('in viewEditFields with: ', employee);
+        vm.edit = true;
+        vm.employeeToEdit = employee;
+        console.log(vm.employeeToEdit);
     }
 
     vm.changeEmployeeStatus = function(employee){
