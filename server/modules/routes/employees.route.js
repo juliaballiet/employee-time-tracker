@@ -29,5 +29,19 @@ router.post('/', (req, res) => {
     })
 })
 
+router.put('/status/:id/:active', (req, res) => {
+    console.log('/status PUT hit with: ', req.params.id, req.params.active);
+    const employeeToChangeId = req.params.id;
+    const employeeToChangeStatus = req.params.active;
+    const query = `UPDATE "employees" SET "active" = $1
+                    WHERE "id" = $2;`;
+    pool.query(query, [employeeToChangeStatus, employeeToChangeId]).then((results) => {
+        res.sendStatus(201);
+    }).catch((error) => {
+        console.log('error: ', error);
+        res.sendStatus(500);
+    })
+})
+
 // exports
 module.exports = router;

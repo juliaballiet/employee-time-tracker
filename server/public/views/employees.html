@@ -8,6 +8,7 @@
     <button>Add</button>
 </form>
 
+<h2>Active Employees</h2>
 <table>
     <thead>
         <tr>
@@ -24,8 +25,31 @@
             <td>{{employee.clockin_code}}</td>
             <td>
                 <button>Edit</button>
-                <button ng-click="ec.deleteEmployee(employee.id)">Delete</button>
+                <button ng-click="ec.changeEmployeeStatus(employee)">Deactivate</button>
             </td>
         </tr>
     </tbody>
 </table>
+
+<h2>Deactivated Employees</h2>
+<table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Clock In Code</th>
+                <th>Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="employee in ec.deactivatedEmployeeArray">
+                <td>{{employee.first_name}}</td>
+                <td>{{employee.last_name}}</td>
+                <td>{{employee.clockin_code}}</td>
+                <td>
+                    <button>Edit</button>
+                    <button ng-click="ec.changeEmployeeStatus(employee)">Activate</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
