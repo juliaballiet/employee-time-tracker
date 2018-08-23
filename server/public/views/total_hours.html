@@ -1,1 +1,20 @@
-<h1>{{hc.title}}</h1>
+<h1>Hour Totals</h1>
+
+<h3>Choose the dates you wish to see hours for:</h3>
+Start: <input ng-model="hc.dates.start" type="date"> End: <input ng-model="hc.dates.end" type="date">
+<button ng-click="hc.getHours(hc.dates)">Go</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Hours</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="hours in hc.hoursArray">
+            <td>{{hours.first_name}} {{hours.last_name}}</td>
+            <td>{{hours.hours}}</td>
+        </tr>
+    </tbody>
+</table>

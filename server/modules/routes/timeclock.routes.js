@@ -25,6 +25,26 @@ router.post('/', (req, res) => {
     })
 })
 
+router.post('/hours', (req, res) => {
+    console.log('/timeclock/hours POST hit with: ', req.body);
+    const startDate = req.body.start;
+    const endDate = req.body.end;
+    console.log(startDate, endDate);
+    const queryText = `SELECT "employees"."first_name", 
+                        "employees"."last_name", 
+                        SUM(EXTRACT('minute' FROM "timeclock"."clockout_time" - "timeclock"."clockin_time")) 
+                        AS "hours" FROM "timeclock"
+                        JOIN "employees" ON "employees"."id" = "timeclock"."employee_id"
+                        WHERE "date" BETWEEN $1 AND $2
+                        GROUP BY "employees"."first_name", "employees"."last_name";`
+    pool.query(queryText, [startDate, endDate]).then((results) => {
+        res.send(results.rows);
+    }).catch((error) => {
+        console.log('error: ', error);
+        res.sendStatus(500);
+    })
+})
+
 router.post('/:id', (req, res) => {
     console.log('/timeclock POST route hit with: ', req.params.id);
     const employeesId = req.params.id;
