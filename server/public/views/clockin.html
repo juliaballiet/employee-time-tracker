@@ -1,1 +1,19 @@
-<h1>{{cc.title}}</h1>
+<h1>Employee Clockin</h1>
+
+<input type="number">
+<button>Clock In/Out</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Clocked In</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="employee in cc.employeeArray">
+            <td>{{employee.first_name}} {{employee.last_name}}</td>
+            <td>{{employee.clocked_in}}</td>
+        </tr>
+    </tbody>
+</table>
