@@ -6,5 +6,6 @@
 <div ng-show="cc.clockingIn">
     Hello, {{cc.employee.first_name}}!
     {{cc.status}}
-    <button ng-click="cc.changeStatus(cc.employee.id)">{{cc.button}}</button>
+    <button ng-show="cc.clockedOut" ng-click="cc.clockIn(cc.employee.id)">Clock In</button>
+    <button ng-hide="cc.clockedOut" ng-click="cc.clockOut(cc.employee.id)">Clock Out</button>
 </div>
