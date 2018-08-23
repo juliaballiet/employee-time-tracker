@@ -1,19 +1,10 @@
 <h1>Employee Clockin</h1>
 
-<input type="number">
-<button>Clock In/Out</button>
+<input ng-model="cc.clockInCode" type="number">
+<button ng-click="cc.clockInEmployee(cc.clockInCode)">Go</button>
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Clocked In</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="employee in cc.employeeArray">
-            <td>{{employee.first_name}} {{employee.last_name}}</td>
-            <td>{{employee.clocked_in}}</td>
-        </tr>
-    </tbody>
-</table>
+<div ng-show="cc.clockingIn">
+    Hello, {{cc.employee.first_name}}!
+    {{cc.status}}
+    <button ng-click="cc.changeStatus(cc.employee.id)">{{cc.button}}</button>
+</div>
