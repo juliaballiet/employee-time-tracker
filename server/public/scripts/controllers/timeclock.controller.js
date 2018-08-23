@@ -7,8 +7,9 @@ timeApp.controller('TimeclockController', function($http){
         console.log('/in getHours with: ', dates);
 
         $http({
-            method: 'GET',
-            url: '/timeclock/' + dates
+            method: 'POST',
+            url: '/timeclock/',
+            data: dates
         }).then(function(response){
             console.log('back from server with: ', response.data);
             vm.timeclockArray = response.data

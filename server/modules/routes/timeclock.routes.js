@@ -4,6 +4,27 @@ const router = express.Router();
 const pool = require('../pool');
 
 // routes
+router.post('/', (req, res) => {
+    console.log('/timeclock GET route hit with: ', req.body);
+    const startDate = req.body.start;
+    const endDate = req.body.end;
+    console.log(startDate, endDate);
+    const queryText = `SELECT "timeclock".*, "employees"."first_name", 
+                        "employees"."last_name", EXTRACT('minute' 
+                        FROM "timeclock"."clockout_time" - "timeclock"."clockin_time")
+                        AS "hours" 
+                        FROM "timeclock"
+                        JOIN "employees" 
+                        ON "employees"."id" = "timeclock"."employee_id"
+                        WHERE "date" BETWEEN $1 AND $2`;
+    pool.query(queryText, [startDate, endDate]).then((results) => {
+        res.send(results.rows);
+    }).catch((error) => {
+        console.log('error: ', error);
+        res.sendStatus(500);
+    })
+})
+
 router.post('/:id', (req, res) => {
     console.log('/timeclock POST route hit with: ', req.params.id);
     const employeesId = req.params.id;
