@@ -5,7 +5,7 @@ const pool = require('../pool');
 
 // routes
 router.post('/', (req, res) => {
-    console.log('/timeclock GET route hit with: ', req.body);
+    console.log('/timeclock POST route hit with: ', req.body);
     const startDate = req.body.start;
     const endDate = req.body.end;
     console.log(startDate, endDate);
@@ -38,6 +38,24 @@ router.post('/:id', (req, res) => {
     })
 })
 
+router.put('/', (req, res) => {
+    console.log('/timeclock PUT route hit with: ', req.body);
+    const editedEntry = req.body;
+    const queryText = `UPDATE "timeclock"
+                        SET "date" = $1,
+                        "clockin_time" = $2,
+                        "clockout_time" = $3
+                        WHERE "id" = $4;`;
+    pool.query(queryText, [editedEntry.date, editedEntry.clockin_time,
+    editedEntry.clockout_time, editedEntry.id])
+    .then((results) => {
+        res.sendStatus(201);
+    }).catch((error) => {
+        console.log('error: ', error);
+        res.sendStatus(500);
+    })
+})
+
 router.put('/:id', (req, res) => {
     console.log('/timeclock PUT route hit with: ', req.params.id);
     const employeesId = req.params.id;
@@ -45,6 +63,18 @@ router.put('/:id', (req, res) => {
                         SET "clockout_time" = CURRENT_TIME
                         WHERE "employee_id" = $1`
     pool.query(queryText, [employeesId]).then((results) => {
+        res.sendStatus(201);
+    }).catch((error) => {
+        console.log('error: ', error);
+        res.sendStatus(500);
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    console.log('/timeclock DELETE route hit with: ', req.params.id);
+    const entryToDeleteId = req.params.id;
+    const queryText = `DELETE FROM "timeclock" WHERE "id" = $1;`;
+    pool.query(queryText, [entryToDeleteId]).then((results) => {
         res.sendStatus(201);
     }).catch((error) => {
         console.log('error: ', error);

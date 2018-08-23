@@ -1,10 +1,41 @@
 <h1>Timeclock</h1>
 
 <h3>Choose the dates you wish to see hours for:</h3>
-Start: <input ng-model="tc.dates.start" type="date"> 
-End: <input ng-model="tc.dates.end" type="date">
+Start: <input ng-model="tc.dates.start" type="date"> End: <input ng-model="tc.dates.end" type="date">
 <button ng-click="tc.getHours(tc.dates)">Go</button>
 
-<ul>
-    <li ng-repeat="time in tc.timeclockArray">{{time}}</li>
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Total</th>
+            <th>Modify</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="entry in tc.timeclockArray">
+            <td>{{entry.date}}</td>
+            <td>{{entry.first_name}} {{entry.last_name}}</td>
+            <td>{{entry.clockin_time}}</td>
+            <td>{{entry.clockout_time}}</td>
+            <td>{{entry.hours}}</td>
+            <td>
+                <button ng-click="tc.viewEditEntry(entry)">Edit</button>
+                <button ng-click="tc.deleteEntry(entry.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div ng-show="tc.editing">
+    <h2>Edit entry:</h2>
+    <form ng-submit="tc.editEntry(tc.edit)">
+        <input ng-model="tc.edit.date" type="text">
+        <input ng-model="tc.edit.clockin_time" type="text">
+        <input ng-model="tc.edit.clockout_time" type="text">
+        <button>Edit</button>
+    </form>
+</div>
