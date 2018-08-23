@@ -1,4 +1,4 @@
-let timeApp = angular.module('timeApp', [ngRoute]);
+let timeApp = angular.module('timeApp', ['ngRoute']);
 
 timeApp.config(function($routeProvider){
     $routeProvider.when('/', {
@@ -6,7 +6,7 @@ timeApp.config(function($routeProvider){
         controller: 'ClockinController as cc'
     }).when('/employees', {
         templateUrl: 'views/employees.html',
-        controller: 'EmployeeController as ac'
+        controller: 'EmployeeController as ec'
     }).when('/timeclock', {
         templateUrl: 'views/timeclock.html',
         controller: 'TimeclockController as tc'

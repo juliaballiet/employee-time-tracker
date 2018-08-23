@@ -1,0 +1,31 @@
+<h1>Manage Employees</h1>
+
+<h2>Add New Employee</h2>
+<form ng-submit="ec.addEmployee(ec.newEmployee)">
+    First Name: <input ng-model="ec.newEmployee.firstName" type="text">
+    Last Name: <input ng-model="ec.newEmployee.lastName" type="text">
+    Clock In Code: <input ng-model="ec.newEmployee.clockInCode" type="number">
+    <button>Add</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Clock In Code</th>
+            <th>Manage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="employee in ec.employeeArray">
+            <td>{{employee.first_name}}</td>
+            <td>{{employee.last_name}}</td>
+            <td>{{employee.clockin_code}}</td>
+            <td>
+                <button>Edit</button>
+                <button ng-click="ec.deleteEmployee(employee.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
