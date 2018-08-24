@@ -1,27 +1,31 @@
-<h1>Hour Totals</h1>
+<div class="center">
+    <h1>Hour Totals</h1>
 
-<h3>Choose the dates you wish to see hours for:</h3>
-<md-input-container>
-    <label>start date</label>
-    <md-datepicker ng-model="hc.dates.start"></md-datepicker>
-</md-input-container>
-<md-input-container>
-    <label>end date</label>
-    <md-datepicker ng-model="hc.dates.end"></md-datepicker>
-</md-input-container>
-<md-button class="md-raised md-primary" ng-click="hc.getHours(hc.dates)">Go</md-button>
+    <h3>See total hours between:</h3>
+    <md-input-container>
+        <label>start date</label>
+        <md-datepicker ng-model="hc.dates.start" md-open-on-focus></md-datepicker>
+    </md-input-container>
+    <md-input-container>
+        <label>end date</label>
+        <md-datepicker ng-model="hc.dates.end" md-open-on-focus></md-datepicker>
+    </md-input-container>
+    <md-button class="md-raised md-primary" ng-click="hc.getHours(hc.dates)">Go</md-button>
+</div>
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Hours</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="hours in hc.hoursArray">
-            <td>{{hours.first_name}} {{hours.last_name}}</td>
-            <td>{{hours.hours.hours}}{{hours.hours.minutes}}</td>
-        </tr>
-    </tbody>
-</table>
+<div ng-show="hc.searching" class="table" id="small-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="hours in hc.hoursArray">
+                <td>{{hours.first_name}} {{hours.last_name}}</td>
+                <td>{{hours.hours.hours}}{{hours.hours.minutes}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

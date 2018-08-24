@@ -55,9 +55,9 @@ timeApp.controller('TimeclockController', ['$http', 'moment', function ($http, m
 
     vm.viewEditFields = function (entry) {
         console.log('in viewEditFields with: ', entry);
-        vm.editing = employee.id;
-        vm.employeeToEdit = employee;
-        console.log(vm.employeeToEdit);
+        vm.editing = entry.id;
+        vm.edit = entry;
+        console.log(vm.edit);
     }
 
     // vm.viewEditEntry = function (entry) {

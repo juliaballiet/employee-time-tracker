@@ -1,8 +1,10 @@
 timeApp.controller('HoursController', function($http){
     let vm = this;
+    vm.searching = false;
     
     vm.getHours = function(dates){
         console.log('/in getHours with: ', dates);
+        vm.searching = true;
 
         $http({
             method: 'POST',

@@ -1,7 +1,7 @@
 <div class="center">
     <h1>Timeclock</h1>
 
-    <h3>See hours between:</h3>
+    <h3>See timeclock between:</h3>
 
     <md-input-container>
         <label>start date</label>
@@ -29,25 +29,25 @@
         </thead>
         <tbody>
             <tr ng-repeat="entry in tc.timeclockArray">
-                <td ng-hide="ec.editing === entry.id">{{entry.date}}</td>
-                <td ng-show="ec.editing === entry.id">
+                <td ng-hide="tc.editing === entry.id">{{entry.date}}</td>
+                <td ng-show="tc.editing === entry.id">
                     <input ng-model="tc.edit.date" type="text">
                 </td>
                 <td>{{entry.first_name}} {{entry.last_name}}</td>
-                <td ng-hide="ec.editing === entry.id">{{entry.clockin_time}}</td>
-                <td ng-show="ec.editing === entry.id">
+                <td ng-hide="tc.editing === entry.id">{{entry.clockin_time}}</td>
+                <td ng-show="tc.editing === entry.id">
                     <input ng-model="tc.edit.clockin_time" type="text">
                 </td>
-                <td ng-hide="ec.editing === entry.id">{{entry.clockout_time}}</td>
-                <td ng-show="ec.editing === entry.id">
+                <td ng-hide="tc.editing === entry.id">{{entry.clockout_time}}</td>
+                <td ng-show="tc.editing === entry.id">
                     <input ng-model="tc.edit.clockout_time" type="text">
                 </td>
                 <td>{{entry.hours.hours}}{{entry.hours.minutes}}</td>
-                <td ng-hide="ec.editing === entry.id">
+                <td ng-hide="tc.editing === entry.id">
                     <md-button class="md-raised md-primary" ng-click="tc.viewEditFields(entry)">Edit</md-button>
                     <md-button class="md-raised md-primary" ng-click="tc.deleteEntry(entry.id)">Delete</md-button>
                 </td>
-                <td ng-show="ec.editing === entry.id">
+                <td ng-show="tc.editing === entry.id">
                     <md-button ng-click="tc.editEntry(tc.edit)" class="md-raised md-primary">confirm changes</md-button>
                     <md-button ng-click="tc.cancelEdit()" class="md-icon-button md-warn">X</md-button>
                 </td>
