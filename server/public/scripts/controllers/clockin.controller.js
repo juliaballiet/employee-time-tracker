@@ -1,4 +1,4 @@
-timeApp.controller('ClockinController', function ($http) {
+timeApp.controller('ClockinController', function ($http, $mdToast, $mdDialog) {
     let vm = this;
     vm.clockingIn = false;
 
@@ -10,14 +10,31 @@ timeApp.controller('ClockinController', function ($http) {
             url: '/employees/' + code
         }).then(function (response) {
             console.log('back from server with: ', response.data);
-            vm.clockingIn = true;
             vm.employee = response.data[0];
             if (vm.employee.clocked_in === false) {
-                vm.status = 'You are currently clocked out.';
-                vm.clockedOut = true;
+                let confirm = $mdDialog.confirm()
+                    .title(`Hello ${vm.employee.first_name}!`)
+                    .textContent('You are currently clocked out.')
+                    .ariaLabel('Clock in')
+                    .targetEvent()
+                    .ok('clock in')
+                    .cancel('cancel');
+
+                $mdDialog.show(confirm).then(function () {
+                    vm.clockIn(vm.employee.id);
+                });
             } else {
-                vm.status = 'You are currently clocked in.';
-                vm.clockedOut = false;
+                let confirm = $mdDialog.confirm()
+                    .title(`Hello ${vm.employee.first_name}!`)
+                    .textContent('You are currently clocked in.')
+                    .ariaLabel('Clock out')
+                    .targetEvent()
+                    .ok('clock out')
+                    .cancel('cancel');
+
+                $mdDialog.show(confirm).then(function () {
+                    vm.clockOut(vm.employee.id);
+                });
             }
             vm.clockInCode = '';
         }).catch(function (error) {
@@ -49,9 +66,14 @@ timeApp.controller('ClockinController', function ($http) {
         $http({
             method: 'PUT',
             url: '/timeclock/' + id
-        }).then(function(response){
+        }).then(function (response) {
             console.log('back from server with: ', response);
-            alert('success!');
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent('you are now clocked out')
+                    .position('top right')
+                    .hideDelay(1500)
+            );
             vm.clockingIn = false;
             clockOutStatus(id);
         }).catch(function (error) {
@@ -60,7 +82,7 @@ timeApp.controller('ClockinController', function ($http) {
         })
     }
 
-    function clockOutStatus(id){
+    function clockOutStatus(id) {
         $http({
             method: 'PUT',
             url: '/employees/' + id
@@ -81,7 +103,12 @@ timeApp.controller('ClockinController', function ($http) {
             url: '/timeclock/' + id
         }).then(function (response) {
             console.log('back from server with: ', response);
-            alert('success!');
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent('you are now clocked in')
+                    .position('top right')
+                    .hideDelay(1500)
+            );
             vm.clockingIn = false;
         }).catch(function (error) {
             console.log('error: ', error);

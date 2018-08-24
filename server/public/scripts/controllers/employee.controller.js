@@ -1,17 +1,33 @@
-timeApp.controller('EmployeeController', function($http){
+timeApp.controller('EmployeeController', function ($http, $mdDialog) {
     let vm = this;
-    vm.edit = false;
+    vm.editing = 0;
 
     getEmployees();
 
-    vm.addEmployee = function(employee){
+    vm.addNewEmployee = function () {
+        $mdDialog.show({
+            controller: 'AddEmployeeController as ac',
+            templateUrl: 'views/add-employee.tmpl.html',
+            parent: angular.element(document.body),
+            // targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: vm.customFullscreen // Only for -xs, -sm breakpoints.
+        }).then(function (answer) {
+                vm.addEmployee(answer);
+                getEmployees();
+            }).catch(function (error) {
+                console.log('error: ', error);
+            });
+    }
+
+    vm.addEmployee = function (employee) {
         console.log('in addEmployee with: ', employee);
 
         $http({
             method: 'POST',
             url: '/employees',
             data: employee
-        }).then(function(response){
+        }).then(function (response) {
             console.log('back from server with: ', response);
             vm.newEmployee = {
                 first_name: '',
@@ -19,37 +35,40 @@ timeApp.controller('EmployeeController', function($http){
                 clockin_code: ''
             }
             getEmployees();
-        }).catch(function(error){
+        }).catch(function (error) {
             console.log('error: ', error);
             alert('there was an error adding the employee');
         })
     }
 
-    vm.viewEditFields = function(employee){
-        console.log('in viewEditFields with: ', employee);
-        vm.edit = true;
+    vm.viewEditFields = function (employee) {
+        vm.editing = employee.id;
         vm.employeeToEdit = employee;
         console.log(vm.employeeToEdit);
     }
 
-    vm.editEmployee = function(employee){
+    vm.cancelEdit = function(){
+        vm.editing = 0;
+    }
+
+    vm.editEmployee = function (employee) {
         console.log('in editEmployee with: ', employee);
 
         $http({
             method: 'PUT',
             url: '/employees',
             data: employee
-        }).then(function(response){
+        }).then(function (response) {
             console.log('back from server with: ', response);
-            vm.edit = false;
+            vm.editing = 0;
             getEmployees();
-        }).catch(function(error){
+        }).catch(function (error) {
             console.log('error: ', error);
             alert('there was an error editing the employee');
         })
     }
 
-    vm.changeEmployeeStatus = function(employee){
+    vm.changeEmployeeStatus = function (employee) {
         console.log('in changeEmployeeStatus with: ', employee);
 
         employee.active = !employee.active;
@@ -57,16 +76,16 @@ timeApp.controller('EmployeeController', function($http){
         $http({
             method: 'PUT',
             url: `employees/status/${employee.id}/${employee.active}`
-        }).then(function(response){
+        }).then(function (response) {
             console.log('back from server with: ', response);
             getEmployees();
-        }).catch(function(error){
+        }).catch(function (error) {
             console.log('error: ', error);
             alert('there was an error editing the employee');
         })
     }
-    
-    function getEmployees(){
+
+    function getEmployees() {
         console.log('in getEmployees');
         vm.employeeArray = [];
         vm.deactivatedEmployeeArray = [];
@@ -74,19 +93,20 @@ timeApp.controller('EmployeeController', function($http){
         $http({
             method: 'GET',
             url: '/employees'
-        }).then(function(response){
+        }).then(function (response) {
             console.log('back from server with: ', response.data);
             employeeArrayToLoopThrough = response.data;
             for (let employee of employeeArrayToLoopThrough) {
-                if(employee.active === true) {
+                if (employee.active === true) {
                     vm.employeeArray.push(employee);
                 } else {
                     vm.deactivatedEmployeeArray.push(employee);
                 }
             }
-        }).catch(function(error){
+        }).catch(function (error) {
             console.log('error: ', error);
             alert('there was an error getting the employees');
         })
     }
+
 })

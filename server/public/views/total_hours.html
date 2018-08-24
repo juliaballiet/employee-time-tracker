@@ -1,8 +1,15 @@
 <h1>Hour Totals</h1>
 
 <h3>Choose the dates you wish to see hours for:</h3>
-Start: <input ng-model="hc.dates.start" type="date"> End: <input ng-model="hc.dates.end" type="date">
-<button ng-click="hc.getHours(hc.dates)">Go</button>
+<md-input-container>
+    <label>start date</label>
+    <md-datepicker ng-model="hc.dates.start"></md-datepicker>
+</md-input-container>
+<md-input-container>
+    <label>end date</label>
+    <md-datepicker ng-model="hc.dates.end"></md-datepicker>
+</md-input-container>
+<md-button class="md-raised md-primary" ng-click="hc.getHours(hc.dates)">Go</md-button>
 
 <table>
     <thead>

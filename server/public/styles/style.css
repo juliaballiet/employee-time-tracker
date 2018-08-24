@@ -1,0 +1,75 @@
+html body {
+    max-width: 780px;
+    margin: 0 auto;
+    font-family: 'Arvo';
+}
+
+img {
+    max-width: 780px;
+}
+
+.table table {
+    border-collapse: collapse;
+    width: 780px;
+    background-color: #e0dddc;
+}
+
+.table table, th, td {
+    padding: 10px;
+}
+
+.table th {
+    background-color: #b8b4b3;
+    text-align: left;
+    width: 100px;
+}
+
+.table td input {
+    width: 100px;
+}
+
+.table tr:nth-child(even) {
+    background-color: #b8b4b3;
+}
+
+#date {
+    width: 20px;
+}
+
+#modify {
+    width: 210px;
+}
+
+#total {
+    width: 20px;
+}
+
+.cancel-edit {
+    color: red;
+}
+
+.center {
+    text-align: center;
+}
+
+.close {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+}
+
+.dialog {
+    margin: 50px;
+}
+
+.inputs{
+    margin: 15px;
+}
+
+#clockin {
+    color: white;
+    text-align: center;
+    background-color: #575453;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 15px;
+}

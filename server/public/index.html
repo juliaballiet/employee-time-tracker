@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
     <script src="vendors/angular.js"></script>
     <script src="vendors/angular-route.js"></script>
     <script src="vendors/moment.js"></script>
+
+    <!-- Angular Material -->
+    <link href="vendors/angular-material.css" rel="stylesheet" type="text/css">
+    <script src="vendors/angular-animate.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-aria.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-messages.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-material.min.js" charset="utf-8"></script>
+
     <script src="scripts/client.js"></script>
+    <script src="scripts/controllers/addemployee.controller.js"></script>
     <script src="scripts/controllers/clockin.controller.js"></script>
     <script src="scripts/controllers/employee.controller.js"></script>
     <script src="scripts/controllers/hours.controller.js"></script>
@@ -15,6 +26,7 @@
     <title>Time Tracker</title>
 </head>
 <body ng-app="timeApp">
+    <img src="images/s_p_logo.png" alt="">
     <ng-view>
 
     </ng-view>

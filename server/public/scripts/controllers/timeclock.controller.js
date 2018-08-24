@@ -2,12 +2,18 @@ timeApp.controller('TimeclockController', ['$http', 'moment', function ($http, m
     let now = moment();
     console.log(now);
     let vm = this;
-
+ 
     vm.timeclockArray = [];
-    vm.editing = false;
+    vm.editing = 0;
+    vm.searching = false;
+
+    vm.cancelEdit = function () {
+        vm.editing = 0;
+    }
 
     vm.getHours = function (dates) {
         console.log('/in getHours with: ', dates);
+        vm.searching = true;
 
         $http({
             method: 'POST',
@@ -47,16 +53,23 @@ timeApp.controller('TimeclockController', ['$http', 'moment', function ($http, m
         })
     }
 
-    vm.viewEditEntry = function (entry) {
-        console.log('in viewEditEntry with: ', entry);
-        vm.editing = true;
-        vm.edit = entry;
+    vm.viewEditFields = function (entry) {
+        console.log('in viewEditFields with: ', entry);
+        vm.editing = employee.id;
+        vm.employeeToEdit = employee;
+        console.log(vm.employeeToEdit);
     }
+
+    // vm.viewEditEntry = function (entry) {
+    //     console.log('in viewEditEntry with: ', entry);
+    //     vm.editing = true;
+    //     vm.edit = entry;
+    // }
 
     vm.editEntry = function (entry) {
         console.log('in editEntry with: ', entry);
 
-        entry.date = moment(entry.date, 'ddd MMM Do YY').format('YYYY-MM-DD');
+        entry.date = moment(entry.date, 'ddd M/D/YY').format('YYYY-MM-DD');
 
         $http({
             method: 'PUT',

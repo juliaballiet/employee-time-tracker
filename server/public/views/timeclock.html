@@ -1,42 +1,67 @@
-<h1>Timeclock</h1>
+<div class="center">
+    <h1>Timeclock</h1>
 
-<h3>Choose the dates you wish to see hours for:</h3>
-Start: <input ng-model="tc.dates.start" type="date"> 
-End: <input ng-model="tc.dates.end" type="date">
-<button ng-click="tc.getHours(tc.dates)">Go</button>
+    <h3>See hours between:</h3>
 
-<table>
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Total</th>
-            <th>Modify</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="entry in tc.timeclockArray">
-            <td>{{entry.date}}</td>
-            <td>{{entry.first_name}} {{entry.last_name}}</td>
-            <td>{{entry.clockin_time}}</td>
-            <td>{{entry.clockout_time}}</td>
-            <td>{{entry.hours.hours}}{{entry.hours.minutes}}</td>
-            <td>
-                <button ng-click="tc.viewEditEntry(entry)">Edit</button>
-                <button ng-click="tc.deleteEntry(entry.id)">Delete</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <md-input-container>
+        <label>start date</label>
+        <md-datepicker ng-model="tc.dates.start" md-open-on-focus></md-datepicker>
+    </md-input-container>
+    <md-input-container>
+        <label>end date</label>
+        <md-datepicker ng-model="tc.dates.end" md-open-on-focus></md-datepicker>
+    </md-input-container>
+
+    <md-button class="md-raised md-primary" ng-click="tc.getHours(tc.dates)">Go</md-button>
+</div>
+
+<div ng-show="tc.searching" class="table">
+    <table>
+        <thead>
+            <tr>
+                <th id="date">Date</th>
+                <th>Name</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th id="total">Total</th>
+                <th id="modify">Modify</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="entry in tc.timeclockArray">
+                <td ng-hide="ec.editing === entry.id">{{entry.date}}</td>
+                <td ng-show="ec.editing === entry.id">
+                    <input ng-model="tc.edit.date" type="text">
+                </td>
+                <td>{{entry.first_name}} {{entry.last_name}}</td>
+                <td ng-hide="ec.editing === entry.id">{{entry.clockin_time}}</td>
+                <td ng-show="ec.editing === entry.id">
+                    <input ng-model="tc.edit.clockin_time" type="text">
+                </td>
+                <td ng-hide="ec.editing === entry.id">{{entry.clockout_time}}</td>
+                <td ng-show="ec.editing === entry.id">
+                    <input ng-model="tc.edit.clockout_time" type="text">
+                </td>
+                <td>{{entry.hours.hours}}{{entry.hours.minutes}}</td>
+                <td ng-hide="ec.editing === entry.id">
+                    <md-button class="md-raised md-primary" ng-click="tc.viewEditFields(entry)">Edit</md-button>
+                    <md-button class="md-raised md-primary" ng-click="tc.deleteEntry(entry.id)">Delete</md-button>
+                </td>
+                <td ng-show="ec.editing === entry.id">
+                    <md-button ng-click="tc.editEntry(tc.edit)" class="md-raised md-primary">confirm changes</md-button>
+                    <md-button ng-click="tc.cancelEdit()" class="md-icon-button md-warn">X</md-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <div ng-show="tc.editing">
     <h2>Edit entry:</h2>
-    <form ng-submit="tc.editEntry(tc.edit)">
+    <form>
         <input ng-model="tc.edit.date" type="text">
         <input ng-model="tc.edit.clockin_time" type="text">
         <input ng-model="tc.edit.clockout_time" type="text">
-        <button>Edit</button>
+        <md-button class="md-raised md-primary" ng-click="tc.editEntry(tc.edit)">Edit</md-button>
     </form>
 </div>

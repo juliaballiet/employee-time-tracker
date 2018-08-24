@@ -1,11 +1,6 @@
-<h1>Employee Clockin</h1>
+<div id="clockin">
+    <h1>Employee Clockin</h1>
 
-<input ng-model="cc.clockInCode" type="number">
-<button ng-click="cc.clockInEmployee(cc.clockInCode)">Go</button>
-
-<div ng-show="cc.clockingIn">
-    Hello, {{cc.employee.first_name}}!
-    {{cc.status}}
-    <button ng-show="cc.clockedOut" ng-click="cc.clockIn(cc.employee.id)">Clock In</button>
-    <button ng-hide="cc.clockedOut" ng-click="cc.clockOut(cc.employee.id)">Clock Out</button>
+    <input ng-model="cc.clockInCode" type="number">
+    <md-button class="md-raised md-primary" ng-click="cc.clockInEmployee(cc.clockInCode)">Go</md-button>
 </div>
