@@ -10,13 +10,14 @@ router.post('/', (req, res) => {
     const endDate = req.body.end;
     console.log(startDate, endDate);
     const queryText = `SELECT "timeclock".*, "employees"."first_name", 
-                        "employees"."last_name", EXTRACT('minute' 
-                        FROM "timeclock"."clockout_time" - "timeclock"."clockin_time")
+                        "employees"."last_name", 
+                        "timeclock"."clockout_time" - "timeclock"."clockin_time"
                         AS "hours" 
                         FROM "timeclock"
                         JOIN "employees" 
                         ON "employees"."id" = "timeclock"."employee_id"
-                        WHERE "date" BETWEEN $1 AND $2`;
+                        WHERE "date" BETWEEN $1 AND $2
+                        ORDER BY "date"`;
     pool.query(queryText, [startDate, endDate]).then((results) => {
         res.send(results.rows);
     }).catch((error) => {
@@ -32,7 +33,7 @@ router.post('/hours', (req, res) => {
     console.log(startDate, endDate);
     const queryText = `SELECT "employees"."first_name", 
                         "employees"."last_name", 
-                        SUM(EXTRACT('minute' FROM "timeclock"."clockout_time" - "timeclock"."clockin_time")) 
+                        SUM("timeclock"."clockout_time" - "timeclock"."clockin_time") 
                         AS "hours" FROM "timeclock"
                         JOIN "employees" ON "employees"."id" = "timeclock"."employee_id"
                         WHERE "date" BETWEEN $1 AND $2
@@ -81,7 +82,8 @@ router.put('/:id', (req, res) => {
     const employeesId = req.params.id;
     const queryText = `UPDATE "timeclock"
                         SET "clockout_time" = CURRENT_TIME
-                        WHERE "employee_id" = $1`
+                        WHERE "employee_id" = $1
+                        AND "clockout_time" is NULL;`;
     pool.query(queryText, [employeesId]).then((results) => {
         res.sendStatus(201);
     }).catch((error) => {

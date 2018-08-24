@@ -22,7 +22,7 @@ End: <input ng-model="tc.dates.end" type="date">
             <td>{{entry.first_name}} {{entry.last_name}}</td>
             <td>{{entry.clockin_time}}</td>
             <td>{{entry.clockout_time}}</td>
-            <td>{{entry.hours}}</td>
+            <td>{{entry.hours.hours}}{{entry.hours.minutes}}</td>
             <td>
                 <button ng-click="tc.viewEditEntry(entry)">Edit</button>
                 <button ng-click="tc.deleteEntry(entry.id)">Delete</button>

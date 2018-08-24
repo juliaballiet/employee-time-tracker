@@ -41,6 +41,7 @@ timeApp.controller('EmployeeController', function($http){
             data: employee
         }).then(function(response){
             console.log('back from server with: ', response);
+            vm.edit = false;
             getEmployees();
         }).catch(function(error){
             console.log('error: ', error);

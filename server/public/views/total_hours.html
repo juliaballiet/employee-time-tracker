@@ -14,7 +14,7 @@ Start: <input ng-model="hc.dates.start" type="date"> End: <input ng-model="hc.da
     <tbody>
         <tr ng-repeat="hours in hc.hoursArray">
             <td>{{hours.first_name}} {{hours.last_name}}</td>
-            <td>{{hours.hours}}</td>
+            <td>{{hours.hours.hours}}{{hours.hours.minutes}}</td>
         </tr>
     </tbody>
 </table>

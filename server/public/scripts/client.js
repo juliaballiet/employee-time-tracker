@@ -1,5 +1,7 @@
 let timeApp = angular.module('timeApp', ['ngRoute']);
 
+timeApp.constant("moment", moment);
+
 timeApp.config(function($routeProvider){
     $routeProvider.when('/', {
         templateUrl: 'views/clockin.html',
