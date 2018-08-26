@@ -8,6 +8,10 @@ img {
     max-width: 780px;
 }
 
+.datepicker {
+    width: 50px;
+}
+
 .table table {
     border-collapse: collapse;
     width: 920px;

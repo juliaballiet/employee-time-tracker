@@ -74,6 +74,7 @@ timeApp.controller('TimeclockController', ['$http', '$mdDialog', 'moment', '$mdT
     vm.viewEditFields = function (entry) {
         console.log('in viewEditFields with: ', entry);
         vm.editing = entry.id;
+        entry.date = moment(entry.date).format('MM-DD-YYYY');
         vm.edit = entry;
         console.log(vm.edit);
     }
@@ -81,7 +82,7 @@ timeApp.controller('TimeclockController', ['$http', '$mdDialog', 'moment', '$mdT
     vm.editEntry = function (entry) {
         console.log('in editEntry with: ', entry);
 
-        entry.date = moment(entry.date, 'ddd M/D/YY').format('YYYY-MM-DD');
+        entry.date = moment(entry.date, 'MM-DD-YYYY').format('YYYY-MM-DD');
 
         $http({
             method: 'PUT',
