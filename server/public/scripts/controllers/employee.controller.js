@@ -1,6 +1,11 @@
 timeApp.controller('EmployeeController', function ($http, $mdDialog) {
     let vm = this;
     vm.editing = 0;
+    vm.showDeactivated = false;
+
+    vm.toggleDeactivatedEmployees = function(){
+        vm.showDeactivated = !vm.showDeactivated;
+    }
 
     getEmployees();
 

@@ -43,7 +43,7 @@ timeApp.controller('TimeclockController', ['$http', '$mdDialog', 'moment', '$mdT
 
         let confirm = $mdDialog.confirm()
             .title('Are you sure you would like to delete this?')
-            .textContent('Deleting an etry cannot be undone.')
+            .textContent('Deleting an entry cannot be undone.')
             .ariaLabel('Delete')
             .ok('Delete')
             .cancel('Cancel');
