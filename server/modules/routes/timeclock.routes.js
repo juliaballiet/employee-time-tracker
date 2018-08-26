@@ -26,10 +26,10 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/hours', (req, res) => {
-    console.log('/timeclock/hours POST hit with: ', req.body);
-    const startDate = req.body.start;
-    const endDate = req.body.end;
+router.get('/hours', (req, res) => {
+    console.log('/timeclock/hours POST hit with: ', req.query.start, req.query.end);
+    const startDate = req.query.start;
+    const endDate = req.query.end;
     console.log(startDate, endDate);
     const queryText = `SELECT "employees"."first_name", 
                         "employees"."last_name", 

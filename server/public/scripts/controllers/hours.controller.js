@@ -5,11 +5,12 @@ timeApp.controller('HoursController', function($http){
     vm.getHours = function(dates){
         console.log('/in getHours with: ', dates);
         vm.searching = true;
+        let start = moment(dates.start).format('YYYY-MM-DD');
+        let end = moment(dates.end).format('YYYY-MM-DD');
 
         $http({
-            method: 'POST',
-            url: '/timeclock/hours',
-            data: dates
+            method: 'GET',
+            url: `/timeclock/hours?start=${start}&end=${end}`
         }).then(function(response){
             console.log('back from server with: ', response.data);
             let responseArray = response.data
