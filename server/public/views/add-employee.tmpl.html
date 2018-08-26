@@ -1,15 +1,17 @@
-<md-toolbar>
-    <div class="md-toolbar-tools">
-        <h2>Add New Employee</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="ac.cancel()">
-            <div class="close">X</div>
-        </md-button>
+<div id="dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Add New Employee</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="ac.cancel()">
+                <div class="close">X</div>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div class="dialog">
+        <div class="inputs">First Name: <input ng-model="ac.newEmployee.first_name" type="text"></div>
+        <div class="inputs">Last Name: <input ng-model="ac.newEmployee.last_name" type="text"></div>
+        <div class="inputs">Clock In Code: <input ng-model="ac.newEmployee.clockin_code" type="number"></div>
+        <md-button ng-click="ac.answer(ac.newEmployee)" class="md-raised md-primary">Add</md-button>
     </div>
-</md-toolbar>
-<div class="dialog">
-    <div class="inputs">First Name: <input ng-model="ac.newEmployee.first_name" type="text"></div>
-    <div class="inputs">Last Name: <input ng-model="ac.newEmployee.last_name" type="text"></div>
-    <div class="inputs">Clock In Code: <input ng-model="ac.newEmployee.clockin_code" type="number"></div>
-    <md-button ng-click="ac.answer(ac.newEmployee)" class="md-raised md-primary">Add</md-button>
 </div>

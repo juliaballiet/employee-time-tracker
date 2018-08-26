@@ -4,10 +4,10 @@ const router = express.Router();
 const pool = require('../pool');
 
 // routes
-router.post('/', (req, res) => {
-    console.log('/timeclock POST route hit with: ', req.body);
-    const startDate = req.body.start;
-    const endDate = req.body.end;
+router.get('/', (req, res) => {
+    console.log('/timeclock GET route hit with: ', req.query.start, req.query.end);
+    const startDate = req.query.start;
+    const endDate = req.query.end;
     console.log(startDate, endDate);
     const queryText = `SELECT "timeclock".*, "employees"."first_name", 
                         "employees"."last_name", 
@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
                         JOIN "employees" 
                         ON "employees"."id" = "timeclock"."employee_id"
                         WHERE "date" BETWEEN $1 AND $2
-                        ORDER BY "date"`;
+                        ORDER BY "date";`;
     pool.query(queryText, [startDate, endDate]).then((results) => {
         res.send(results.rows);
     }).catch((error) => {

@@ -1,8 +1,7 @@
-timeApp.controller('TimeclockController', ['$http', 'moment', function ($http, moment) {
+timeApp.controller('TimeclockController', ['$http', '$mdDialog', 'moment', '$mdToast', function ($http, $mdDialog, moment, $mdToast) {
     let now = moment();
-    console.log(now);
     let vm = this;
- 
+
     vm.timeclockArray = [];
     vm.editing = 0;
     vm.searching = false;
@@ -14,11 +13,12 @@ timeApp.controller('TimeclockController', ['$http', 'moment', function ($http, m
     vm.getHours = function (dates) {
         console.log('/in getHours with: ', dates);
         vm.searching = true;
+        let start = moment(dates.start).format('YYYY-MM-DD');
+        let end = moment(dates.end).format('YYYY-MM-DD');
 
         $http({
-            method: 'POST',
-            url: '/timeclock/',
-            data: dates
+            method: 'GET',
+            url: `/timeclock?start=${start}&end=${end}`
         }).then(function (response) {
             console.log('back from server with: ', response.data);
             let responseArray = response.data;
@@ -41,16 +41,34 @@ timeApp.controller('TimeclockController', ['$http', 'moment', function ($http, m
     vm.deleteEntry = function (id) {
         console.log('in deleteEntry with: ', id);
 
-        $http({
-            method: 'DELETE',
-            url: '/timeclock/' + id
-        }).then(function (response) {
-            console.log('back from server with: ', response.data);
-            vm.getHours(vm.dates);
-        }).catch(function (error) {
-            console.log('error: ', error);
-            alert('there was an error getting the timeclock');
-        })
+        let confirm = $mdDialog.confirm()
+            .title('Are you sure you would like to delete this?')
+            .textContent('Deleting an etry cannot be undone.')
+            .ariaLabel('Delete')
+            .ok('Delete')
+            .cancel('Cancel');
+
+        $mdDialog.show(confirm).then(function () {
+            $http({
+                method: 'DELETE',
+                url: '/timeclock/' + id
+            }).then(function (response) {
+                console.log('back from server with: ', response.data);
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('entry deleted')
+                        .position('top right')
+                        .hideDelay(1500)
+                );
+                vm.getHours(vm.dates);
+            }).catch(function (error) {
+                console.log('error: ', error);
+                alert('there was an error getting the timeclock');
+            })
+        }).catch(function(error){
+
+        });
+
     }
 
     vm.viewEditFields = function (entry) {
@@ -59,12 +77,6 @@ timeApp.controller('TimeclockController', ['$http', 'moment', function ($http, m
         vm.edit = entry;
         console.log(vm.edit);
     }
-
-    // vm.viewEditEntry = function (entry) {
-    //     console.log('in viewEditEntry with: ', entry);
-    //     vm.editing = true;
-    //     vm.edit = entry;
-    // }
 
     vm.editEntry = function (entry) {
         console.log('in editEntry with: ', entry);

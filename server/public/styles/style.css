@@ -32,7 +32,7 @@ img {
     background-color: #b8b4b3;
 }
 
-#date {
+.table #date {
     width: 20px;
 }
 
@@ -72,6 +72,10 @@ img {
     max-width: 500px;
     margin: 20px auto;
     padding: 15px;
+}
+
+#dialog {
+    margin: 0 auto;
 }
 
 #small-table table {

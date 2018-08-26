@@ -55,13 +55,3 @@
         </tbody>
     </table>
 </div>
-
-<div ng-show="tc.editing">
-    <h2>Edit entry:</h2>
-    <form>
-        <input ng-model="tc.edit.date" type="text">
-        <input ng-model="tc.edit.clockin_time" type="text">
-        <input ng-model="tc.edit.clockout_time" type="text">
-        <md-button class="md-raised md-primary" ng-click="tc.editEntry(tc.edit)">Edit</md-button>
-    </form>
-</div>
