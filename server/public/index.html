@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,10 +26,24 @@
     <script src="scripts/controllers/timeclock.controller.js"></script>
     <title>Time Tracker</title>
 </head>
+
 <body ng-app="timeApp">
-    <img src="images/s_p_logo.png" alt="">
+
+    <div class="links">
+        <a href="/#!/">clock in</a>
+        <a href="/#!/employees">employees</a>
+        <a href="/#!/timeclock">timeclock</a>
+        <a href="/#!/hours">payroll</a>
+    </div>
+
+    <div class="center">
+        <img src="images/s_p_logo.png" alt="">
+    </div>
+
     <ng-view>
 
     </ng-view>
+
 </body>
+
 </html>

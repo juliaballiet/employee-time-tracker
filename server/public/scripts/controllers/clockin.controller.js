@@ -11,35 +11,55 @@ timeApp.controller('ClockinController', function ($http, $mdToast, $mdDialog) {
         }).then(function (response) {
             console.log('back from server with: ', response.data);
             vm.employee = response.data[0];
-            if (vm.employee.clocked_in === false) {
-                let confirm = $mdDialog.confirm()
-                    .title(`Hello ${vm.employee.first_name}!`)
-                    .textContent('You are currently clocked out.')
-                    .ariaLabel('Clock in')
-                    .targetEvent()
-                    .ok('clock in')
-                    .cancel('cancel');
-
-                $mdDialog.show(confirm).then(function () {
-                    vm.clockIn(vm.employee.id);
-                });
+            if(vm.employee.active === false){
+                $mdDialog.show(
+                    $mdDialog.alert()
+                      .parent(angular.element(document.querySelector('#popupContainer')))
+                      .clickOutsideToClose(true)
+                      .title('This employee is not active.')
+                      .textContent('A deactivated employee cannot clock in.')
+                      .ariaLabel('Deactivated employee')
+                      .ok('Okay')
+                  );
             } else {
-                let confirm = $mdDialog.confirm()
-                    .title(`Hello ${vm.employee.first_name}!`)
-                    .textContent('You are currently clocked in.')
-                    .ariaLabel('Clock out')
-                    .targetEvent()
-                    .ok('clock out')
-                    .cancel('cancel');
-
-                $mdDialog.show(confirm).then(function () {
-                    vm.clockOut(vm.employee.id);
-                });
+                if (vm.employee.clocked_in === false) {
+                    let confirm = $mdDialog.confirm()
+                        .title(`Hello ${vm.employee.first_name}!`)
+                        .textContent('You are currently clocked out.')
+                        .ariaLabel('Clock in')
+                        .targetEvent()
+                        .ok('Clock in')
+                        .cancel('Cancel');
+    
+                    $mdDialog.show(confirm).then(function () {
+                        vm.clockIn(vm.employee.id);
+                    });
+                } else {
+                    let confirm = $mdDialog.confirm()
+                        .title(`Hello ${vm.employee.first_name}!`)
+                        .textContent('You are currently clocked in.')
+                        .ariaLabel('Clock out')
+                        .targetEvent()
+                        .ok('Clock out')
+                        .cancel('Cancel');
+    
+                    $mdDialog.show(confirm).then(function () {
+                        vm.clockOut(vm.employee.id);
+                    });
+                }
             }
             vm.clockInCode = '';
         }).catch(function (error) {
             console.log('error: ', error);
-            alert('please enter a valid clockin number!');
+            $mdDialog.show(
+                $mdDialog.alert()
+                  .parent(angular.element(document.querySelector('#popupContainer')))
+                  .clickOutsideToClose(true)
+                  .title('Please enter a valid clockin number.')
+                //   .textContent('You can specify some description text in here.')
+                  .ariaLabel('Invalid clockin')
+                  .ok('Okay')
+              );
         })
     }
 

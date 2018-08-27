@@ -1,11 +1,28 @@
+html {
+    background-color: #575453;
+}
+
 html body {
     max-width: 920px;
     margin: 0 auto;
     font-family: 'Arvo';
+    background-color: white;
+    border: 10px solid white;
+    min-height: 1200px;
+    height: 100%; 
 }
 
 img {
-    max-width: 780px;
+    max-width: 600px;
+}
+
+.links {
+    text-align: right;
+}
+
+a {
+    color: #307142;
+    margin: 0 10px;
 }
 
 .datepicker {

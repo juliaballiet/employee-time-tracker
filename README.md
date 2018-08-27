@@ -5,12 +5,8 @@ CREATE TABLE "employees" (
     "first_name" VARCHAR(30) NOT NULL,
     "last_name" VARCHAR(30) NOT NULL,
     "clockin_id" INT NOT NULL,
-);
-
-CREATE TABLE "clockin" (
-    "id" SERIAL PRIMARY KEY,
-    "employee_id" INT REFERENCES "employees" NOT NULL,
-    "clocked_in" BOOLEAN DEFAULT FALSE NOT NULL
+    "clocked_in" BOOLEAN DEFAULT FALSE NOT NULL,
+    "active" BOOLEAN DEFAULT TRUE NOT NULL
 );
 
 CREATE TABLE "timeclock" (
