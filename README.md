@@ -32,6 +32,7 @@ Fork and clone this repository, and set up a database called "time_tracker". Cre
 
 - [ ] Prevent a clock in clode from being repeated
 - [ ] Optimize styling for mobile use
+- [ ] Add authentication to only allow admin to add and edit employees and timeclock
 
 ## Authors
 

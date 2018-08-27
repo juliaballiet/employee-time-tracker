@@ -1,8 +1,7 @@
 <div class="center">
     <h1>Timeclock</h1>
-
+    <!-- selects dates to see timeclock between -->
     <h3>See timeclock between:</h3>
-
     <md-input-container>
         <label>start date</label>
         <md-datepicker ng-model="tc.dates.start" md-open-on-focus></md-datepicker>
@@ -11,10 +10,9 @@
         <label>end date</label>
         <md-datepicker ng-model="tc.dates.end" md-open-on-focus></md-datepicker>
     </md-input-container>
-
     <md-button class="md-raised md-primary" ng-click="tc.getHours(tc.dates)">Go</md-button>
 </div>
-
+<!-- shows timeclock between selected dates -->
 <div ng-show="tc.searching" class="table">
     <table>
         <thead>

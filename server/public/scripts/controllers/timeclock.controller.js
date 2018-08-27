@@ -1,5 +1,4 @@
 timeApp.controller('TimeclockController', ['$http', '$mdDialog', 'moment', '$mdToast', function ($http, $mdDialog, moment, $mdToast) {
-    let now = moment();
     let vm = this;
 
     vm.timeclockArray = [];

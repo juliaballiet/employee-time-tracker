@@ -1,6 +1,6 @@
 <div class="center">
     <h1>Hour Totals</h1>
-
+    <!-- selects dates to see hours between -->
     <h3>See total hours between:</h3>
     <md-input-container>
         <label>start date</label>
@@ -12,8 +12,8 @@
     </md-input-container>
     <md-button class="md-raised md-primary" ng-click="hc.getHours(hc.dates)">Go</md-button>
 </div>
-
-<div ng-show="hc.searching" class="table" id="small-table">
+<!-- shows hour totals between selected dates -->
+<div ng-show="hc.showHours" class="table" id="small-table">
     <table>
         <thead>
             <tr>

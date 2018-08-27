@@ -1,9 +1,9 @@
 <div class="center">
     <h1>Manage Employees</h1>
-
+    <!-- opens dialog to create new employee -->
     <md-button class="md-raised md-primary" ng-click="ec.addNewEmployee()">Add New Employee</md-button>
 </div>
-
+<!-- lists all active employees -->
 <h2>Active Employees</h2>
 <div class="table">
     <table>
@@ -40,14 +40,14 @@
             </tr>
         </tbody>
     </table>
-
+    <!-- show or hide deactivated employees -->
     <div class="center">
         <md-button class="md-raised md-primary" ng-hide="ec.showDeactivated" ng-click="ec.toggleDeactivatedEmployees()">Show
             Deactivated Employees</md-button>
         <md-button class="md-raised md-primary" ng-show="ec.showDeactivated" ng-click="ec.toggleDeactivatedEmployees()">Hide
             Deactivated Employees</md-button>
     </div>
-
+    <!-- lists deactivated employees -->
     <div ng-show="ec.showDeactivated">
         <h2>Deactivated Employees</h2>
         <table>

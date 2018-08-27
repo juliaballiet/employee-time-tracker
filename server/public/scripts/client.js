@@ -1,6 +1,6 @@
 let timeApp = angular.module('timeApp', ['ngRoute', 'ngMaterial'])
 .config(function($mdThemingProvider) {
-
+    //defines theme palette
     $mdThemingProvider.definePalette('amazingPaletteName', {
       '50': 'ffebee',
       '100': 'ffcdd2',
@@ -28,9 +28,9 @@ let timeApp = angular.module('timeApp', ['ngRoute', 'ngMaterial'])
       .primaryPalette('amazingPaletteName')
   
   });
-
+// sets up moment.js
 timeApp.constant("moment", moment);
-
+// defines routes
 timeApp.config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/clockin.html',
