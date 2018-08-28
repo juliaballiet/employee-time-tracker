@@ -2,7 +2,7 @@ CREATE TABLE "employees" (
     "id" SERIAL PRIMARY KEY,
     "first_name" VARCHAR(30) NOT NULL,
     "last_name" VARCHAR(30) NOT NULL,
-    "clockin_id" INT NOT NULL,
+    "clockin_code" INT NOT NULL,
     "clocked_in" BOOLEAN DEFAULT FALSE NOT NULL,
     "active" BOOLEAN DEFAULT TRUE NOT NULL
 );

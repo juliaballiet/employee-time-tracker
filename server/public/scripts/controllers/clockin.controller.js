@@ -1,5 +1,5 @@
 timeApp.controller('ClockinController', function ($http, $mdToast, $mdDialog) {
-    let vm = this;
+    let vm = this; 
 
     // opens dialog that allows employee to clock in or out
     vm.clockInEmployee = function (code) {
