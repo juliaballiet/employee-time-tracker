@@ -17,9 +17,15 @@ Fork and clone this repository, and set up a database called "time_tracker". Cre
 
 ## Screen Shots
 
+The hours totals view allows administrators to easily view each employee's total hours between selected dates.
 ![screenshot one](server/public/images/hour-totals.png)
+
+The timeclock view allows administrators to view all employees' clock in and out times between selected dates.
+![screenshot three](server/public/images/timeclock.png)
+
+The manage employees view allows administrators to add new employees, as well as edit and decativate existing employees.
 ![screenshot two](server/public/images/manage-employees.png)
-![screenshot three](server/public/wireframes/timeclock.png)
+
 
 ### Completed Features
 
