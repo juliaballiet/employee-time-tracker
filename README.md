@@ -15,6 +15,12 @@ An application that allows employees to clock in. The administrator can manage e
 
 Fork and clone this repository, and set up a database called "time_tracker". Create the tables as outlined in the database.sql file. You will also find mock data that may be inserted for testing purposes.
 
+## Screen Shots
+
+![screenshot one](images/hour-totals.png)
+![screenshot two](wireframes/manage-employees.png)
+![screenshot three](wireframes/timeclock.png)
+
 ### Completed Features
 
 - [x] Allow employees to clock in
