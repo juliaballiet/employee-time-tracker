@@ -17,9 +17,9 @@ Fork and clone this repository, and set up a database called "time_tracker". Cre
 
 ## Screen Shots
 
-![screenshot one](images/hour-totals.png)
-![screenshot two](wireframes/manage-employees.png)
-![screenshot three](wireframes/timeclock.png)
+![screenshot one](public/images/hour-totals.png)
+![screenshot two](public/images/manage-employees.png)
+![screenshot three](public/wireframes/timeclock.png)
 
 ### Completed Features
 
